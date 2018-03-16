@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -28,12 +29,16 @@ class Navigationbar extends React.Component {
   onClickNav = () => {
     this.setState({ isActive: !this.state.isActive });
   };
+  goTo = pathname => {
+    this.props.history.push(pathname);
+  };
   render() {
+    console.log("Nav props: ", this.props);
     return (
       <Container>
         <Navbar>
           <NavbarBrand>
-            <NavbarItem>
+            <NavbarItem isHoverable>
               <img src={bulma} alt="LOGO" /> BULMA
             </NavbarItem>
             <NavbarItem isHidden="desktop" href="https://twitter.com/azulkipli" aria-label="twitter">
@@ -46,14 +51,18 @@ class Navigationbar extends React.Component {
           </NavbarBrand>
           <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
             <NavbarStart>
-              <NavbarItem href="#">Home</NavbarItem>
+              <NavbarItem isHoverable isActive={this.props.match.isExact} onClick={() => this.goTo("/help")}>
+                Help
+              </NavbarItem>
               <NavbarItem hasDropdown isHoverable>
-                <NavbarLink href="#documentation">Dropdown</NavbarLink>
+                <NavbarLink isActive={this.props.match.isExact}>Dropdown</NavbarLink>
                 <NavbarDropdown>
-                  <NavbarItem href="#">One</NavbarItem>
-                  <NavbarItem href="#">Two</NavbarItem>
+                  <NavbarItem isHoverable onClick={() => this.goTo("/")}>
+                    Home
+                  </NavbarItem>
+                  <NavbarItem isHoverable>Two</NavbarItem>
                   <NavbarDivider />
-                  <NavbarItem href="#">Separated</NavbarItem>
+                  <NavbarItem onClick={() => this.goTo("/help")}>Help</NavbarItem>
                 </NavbarDropdown>
               </NavbarItem>
             </NavbarStart>
@@ -69,13 +78,12 @@ class Navigationbar extends React.Component {
                   <Control>
                     <Button
                       id="twitter"
+                      aria-label="Tweet"
                       data-social-network="Twitter"
                       data-social-action="tweet"
                       data-social-target="http://bloomer.js.org"
                       target="_blank"
-                      rel="noopener"
-                      href="https://twitter.com/intent/tweet?text=bloomer:
-                            a set of React Stateless Components for bulma.io&amp;url=http://bloomer.js.org&amp;via=AlgusDark"
+                      href="https://twitter.com/intent/tweet?text=cra_bulma:Create React App use bloomer set of React Stateless Components for bulma.io&amp;url=http://bloomer.js.org&amp;via=azulkipli"
                     >
                       <FontAwesomeIcon icon={faTwitter} color="rgb(85, 172, 238)" />
                       <span style={{ marginLeft: "5px" }}>Tweet</span>
@@ -91,4 +99,4 @@ class Navigationbar extends React.Component {
   }
 }
 
-export default Navigationbar;
+export default withRouter(Navigationbar);

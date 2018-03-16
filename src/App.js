@@ -1,12 +1,16 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import MainRoute from "./routes/MainRoute";
 import Navigationbar from "./components/Navigationbar";
 import Heropart from "./components/Heropart";
 import Footerpart from "./components/Footerpart";
-import { Columns, Column, Content, Container, Section } from "bloomer";
+import { Container, Section } from "bloomer";
 import "bulma/css/bulma.css";
+import "./global.css";
 
 class App extends React.Component {
   render() {
+    console.log("props", this.props);
     return (
       <div className="app">
         <Navigationbar />
@@ -14,14 +18,7 @@ class App extends React.Component {
 
         <Section>
           <Container>
-            <Content>
-              <Columns>
-                <Column>
-                  <h1>Content</h1>
-                  <p>Is the component to handle WYSIWYG generated content</p>
-                </Column>
-              </Columns>
-            </Content>
+            <MainRoute />
           </Container>
         </Section>
 
@@ -31,4 +28,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

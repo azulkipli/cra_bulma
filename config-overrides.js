@@ -7,10 +7,10 @@ module.exports = function override(config, env) {
   // remove console.log
   if (env === "production") {
     console.log("⚡ Console.log removed on Production");
-    const optionRemoveConsole = {
-      plugins: [["transform-remove-console", { exclude: ["error", "warn"] }]]
-    };
-    config = injectBabelPlugin(["transform-remove-console", optionRemoveConsole], config);
+    // const optionRemoveConsole = {
+    //   plugins: [["transform-remove-console", { exclude: ["error", "warn"] }]]
+    // };
+    config = injectBabelPlugin(["transform-remove-console", { exclude: ["error", "warn"] }], config);
   }
 
   if (env === "production") {

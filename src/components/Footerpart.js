@@ -18,16 +18,19 @@ class Footerpart extends React.Component {
             <Columns>
               <Column>
                 <p>
-                  Made with <FontAwesomeIcon icon={faHeart} /> by <a>Azul</a>
+                  Made with <FontAwesomeIcon icon={faHeart} /> by{" "}
+                  <a target="_blank" rel="noopener noreferrer" href="https://github.com/azulkipli">
+                    Azul
+                  </a>
                 </p>
               </Column>
             </Columns>
-            <Content isSize="small">
+            <Content style={{ fontSize: "0.85em" }}>
               <p>
-                The source code is licensed under <a target="_blank">MIT</a>.
+                The source code is licensed under <a>MIT</a>.
               </p>
               <p>
-                The website content is licensed under <a target="_blank">CC ANS 4.0</a>.
+                The website content is licensed under <a>CC ANS 4.0</a>.
               </p>
             </Content>
           </Content>
