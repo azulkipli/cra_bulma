@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -21,7 +21,10 @@ import faTwitter from "@fortawesome/fontawesome-free-brands/faTwitter";
 import faGithub from "@fortawesome/fontawesome-free-brands/faGithub";
 
 import bulma from "../images/bulma.png";
+import { observer, inject } from "mobx-react";
 
+@inject("gui")
+@observer
 class Navigationbar extends React.Component {
   state = {
     isActive: false
@@ -32,15 +35,22 @@ class Navigationbar extends React.Component {
   goTo = pathname => {
     this.props.history.push(pathname);
   };
+  pageActive = name => {
+    const { location } = this.props;
+
+    return name === location.pathname ? "navbar-item is-active" : "navbar-item";
+  };
+
   render() {
-    console.log("Nav props: ", this.props);
+    const { location } = this.props;
+    console.info("location: ", location);
     return (
       <Container>
         <Navbar>
           <NavbarBrand>
-            <NavbarItem isHoverable>
-              <img src={bulma} alt="LOGO" /> BULMA
-            </NavbarItem>
+            <Link to="/" className="navbar-item">
+              <img src={bulma} alt="LOGO" /> CRA BULMA
+            </Link>
             <NavbarItem isHidden="desktop" href="https://twitter.com/azulkipli" aria-label="twitter">
               <FontAwesomeIcon icon={faTwitter} color="#55acee" />
             </NavbarItem>
@@ -51,18 +61,25 @@ class Navigationbar extends React.Component {
           </NavbarBrand>
           <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
             <NavbarStart>
-              <NavbarItem isHoverable isActive={this.props.match.isExact} onClick={() => this.goTo("/help")}>
+              <Link to="/about" className={this.pageActive("/about")}>
+                About
+              </Link>
+              <Link to="/help" className={this.pageActive("/help")}>
                 Help
-              </NavbarItem>
+              </Link>
               <NavbarItem hasDropdown isHoverable>
-                <NavbarLink isActive={this.props.match.isExact}>Dropdown</NavbarLink>
+                <NavbarLink>Dropdown</NavbarLink>
                 <NavbarDropdown>
-                  <NavbarItem isHoverable onClick={() => this.goTo("/")}>
+                  <Link className={this.pageActive()} to="/">
                     Home
-                  </NavbarItem>
-                  <NavbarItem isHoverable>Two</NavbarItem>
+                  </Link>
+                  <Link className={this.pageActive()} to="/about">
+                    About
+                  </Link>
                   <NavbarDivider />
-                  <NavbarItem onClick={() => this.goTo("/help")}>Help</NavbarItem>
+                  <Link className={this.pageActive()} to="/help">
+                    Help
+                  </Link>
                 </NavbarDropdown>
               </NavbarItem>
             </NavbarStart>
@@ -99,4 +116,4 @@ class Navigationbar extends React.Component {
   }
 }
 
-export default withRouter(Navigationbar);
+export default Navigationbar;

@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Loadable from "react-loadable";
-// import fakeDelay from "../utils/fakeDelay";
 import Loading from "../components/Loading";
 
 const Home = Loadable({
@@ -14,9 +13,15 @@ const Help = Loadable({
   loading: () => <Loading />
 });
 
+const About = Loadable({
+  loader: () => import(/* webpackChunkName: "about"*/ "../components/About"),
+  loading: () => <Loading />
+});
+
 const MainRoute = () => (
   <Switch>
     <Route exact path="/" component={Home} />
+    <Route path="/about" component={About} />
     <Route path="/help" component={Help} />
   </Switch>
 );

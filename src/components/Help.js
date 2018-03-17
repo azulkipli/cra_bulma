@@ -6,7 +6,6 @@ import { Columns, Column, Content } from "bloomer";
 @observer
 class Help extends React.Component {
   render() {
-    console.info("Help props: ", this.props);
     return (
       <Content>
         <Columns>

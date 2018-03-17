@@ -1,5 +1,20 @@
 import React from "react";
-import { Hero, HeroBody, HeroFooter, Container, Tab, Tabs, TabList, TabLink, Columns, Title } from "bloomer";
+import { Link } from "react-router-dom";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Hero,
+  HeroBody,
+  Container,
+  // HeroFooter,
+  // Tab,
+  // Tabs,
+  // TabList,
+  // TabLink,
+  Columns
+} from "bloomer";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import faHome from "@fortawesome/fontawesome-free-solid/faHome";
 
 class Heropart extends React.Component {
   state = {
@@ -10,15 +25,26 @@ class Heropart extends React.Component {
   };
   render() {
     return (
-      <Hero isColor="primary">
+      <Hero {...this.props}>
         <HeroBody>
-          <Container hasTextAlign="centered">
+          <Container>
             <Columns>
-              <Title>CRA Bulma</Title>
+              <Breadcrumb>
+                <ul>
+                  <BreadcrumbItem>
+                    <Link to="/">
+                      <FontAwesomeIcon icon={faHome} />
+                    </Link>
+                  </BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <a>{this.props.title}</a>
+                  </BreadcrumbItem>
+                </ul>
+              </Breadcrumb>
             </Columns>
           </Container>
         </HeroBody>
-
+        {/* 
         <HeroFooter>
           <Tabs isBoxed isFullWidth>
             <Container>
@@ -41,7 +67,8 @@ class Heropart extends React.Component {
               </TabList>
             </Container>
           </Tabs>
-        </HeroFooter>
+        </HeroFooter> 
+        */}
       </Hero>
     );
   }

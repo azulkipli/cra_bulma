@@ -1,3 +1,8 @@
-nav.navbar .navbar-item {
-  cursor: pointer;
+.navbar-item,
+.navbar-link {
+  color: #5a5a5a;
+}
+
+.breadcrumb li + li::before {
+  color: #fff;
 }

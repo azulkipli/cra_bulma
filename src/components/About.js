@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 
 @inject("gui")
 @observer
-class Home extends React.Component {
+class About extends React.Component {
   showAlert = type => {
     const { gui } = this.props;
     // openAlert(title = "", message = "", autohide = true, timeout = 5000, type = "info", scrollTo = "", min = 95)
@@ -18,13 +18,12 @@ class Home extends React.Component {
   };
 
   render() {
-    // console.log("Home props: ", this.props);
     return (
       <Content>
         <Columns>
           <Column>
-            <h1>Home</h1>
-            <p>This is content for landing page</p>
+            <h1>About</h1>
+            <p>This CRA template already support code splitting.</p>
           </Column>
         </Columns>
       </Content>
@@ -32,4 +31,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default About;
