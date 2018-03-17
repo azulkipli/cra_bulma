@@ -1,6 +1,6 @@
 const { injectBabelPlugin } = require("react-app-rewired");
 const rewireMobX = require("react-app-rewire-mobx");
-// const rewireVendorSplitting = require("react-app-rewire-vendor-splitting");
+const rewireVendorSplitting = require("react-app-rewire-vendor-splitting");
 const CriticalPlugin = require("webpack-plugin-critical").CriticalPlugin;
 
 module.exports = function override(config, env) {
@@ -10,7 +10,7 @@ module.exports = function override(config, env) {
     // const optionRemoveConsole = {
     //   plugins: [["transform-remove-console", { exclude: ["error", "warn"] }]]
     // };
-    config = injectBabelPlugin(["transform-remove-console", { exclude: ["error", "warn"] }], config);
+    config = injectBabelPlugin(["transform-remove-console", { exclude: ["error", "warn", "info"] }], config);
   }
 
   if (env === "production") {
@@ -28,7 +28,7 @@ module.exports = function override(config, env) {
   config = rewireMobX(config, env);
 
   // rewireVendorSplitting
-  // config = rewireVendorSplitting(config, env);
+  config = rewireVendorSplitting(config, env);
 
   return config;
 };
