@@ -10,12 +10,13 @@ import "./global.css";
 
 class App extends React.Component {
   render() {
-    console.log("props", this.props);
+    const { location } = this.props;
     return (
       <div className="app">
-        <Navigationbar />
-        <Heropart />
-
+        <Navigationbar {...this.props} />
+        {location.pathname === "/" ? <Heropart isColor="primary" isSize="small" title="Welcome" /> : ""}
+        {location.pathname === "/about" ? <Heropart isColor="dark" isSize="small" title="About Us" /> : ""}
+        {location.pathname === "/help" ? <Heropart isColor="info" isSize="small" title="Help" /> : ""}
         <Section>
           <Container>
             <MainRoute />
